@@ -1377,7 +1377,7 @@ def fetch_moonshot_balance(api_key: str) -> Optional[float]:
         )
         response.raise_for_status()
         data = response.json()
-        balance_cny = data.get("available_balance")
+        balance_cny = data.get("data", {}).get("available_balance")
         if balance_cny is not None:
             logging.info(f"Moonshot balance fetched: ¥{balance_cny:,.0f}")
             return float(balance_cny)
