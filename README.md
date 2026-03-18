@@ -37,7 +37,18 @@ This creates `dashboard.html` with fresh data.
 
 ### 3. View Dashboard
 
-Since you're SSH'd into the VM, copy the file to your local machine:
+Since you're SSH'd into the VM, access the dashboard via HTTP:
+
+```bash
+# On the VM, start the server:
+cd /home/d-tuned/openclaw-usage-dashboard
+python3 -m http.server 8888
+
+# Then on your laptop, open in browser:
+# http://ml-research:8888/dashboard.html
+```
+
+Or copy the file to your local machine:
 
 ```bash
 # On your local machine (laptop), run:
