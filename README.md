@@ -37,12 +37,12 @@ This creates `dashboard.html` with fresh data.
 
 ### 3. View Dashboard
 
-```bash
-# Linux
-xdg-open dashboard.html
+Since you're SSH'd into the VM, copy the file to your local machine:
 
-# Or copy to local machine
-scp user@host:/path/to/dashboard.html ~/Downloads/
+```bash
+# On your local machine (laptop), run:
+scp d-tuned@ml-research:/home/d-tuned/openclaw-usage-dashboard/dashboard.html ~/Downloads/
+open ~/Downloads/dashboard.html
 ```
 
 ## Quick Reference Card
@@ -50,7 +50,7 @@ scp user@host:/path/to/dashboard.html ~/Downloads/
 | Task | Command |
 |------|---------|
 | Refresh dashboard | `python3 generate_dashboard.py` |
-| View dashboard | `xdg-open dashboard.html` |
+| Copy to local machine | `scp d-tuned@ml-research:/home/d-tuned/openclaw-usage-dashboard/dashboard.html ~/Downloads/` |
 | Change days analyzed | Edit `.env` → `DAYS_BACK=60` → regenerate |
 | Change output file | `python3 generate_dashboard.py -o custom.html` |
 | Skip API calls | `python3 generate_dashboard.py --no-api` |
