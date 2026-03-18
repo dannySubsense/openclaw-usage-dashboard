@@ -14,6 +14,7 @@ import os
 import sys
 from dataclasses import dataclass
 from datetime import datetime, date, timedelta, timezone
+import pytz
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -493,7 +494,10 @@ def generate_html(data: DashboardData) -> str:
     # Format top sessions table data
     top_sessions_rows = []
     for session in data.top_sessions[:20]:
-        timestamp_display = session.start_timestamp.strftime("%Y-%m-%d %H:%M")
+        # Convert UTC to Singapore time for display
+        sg_tz = pytz.timezone('Asia/Singapore')
+        timestamp_sg = session.start_timestamp.astimezone(sg_tz)
+        timestamp_display = timestamp_sg.strftime("%Y-%m-%d %H:%M")
         cost_display = f"${session.total_cost:.3f}"
         tokens_display = f"{session.total_input + session.total_output:,}"
 
