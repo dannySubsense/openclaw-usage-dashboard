@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenClaw Token Usage Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"><\/script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -341,7 +341,7 @@
 <body>
     <header>
         <h1>OpenClaw Token Usage Dashboard</h1>
-        <div id="generated-time">Generated: 2026-03-18 06:07 UTC</div>
+        <div id="generated-time">Generated: 2026-03-18 06:41 UTC</div>
     </header>
 
     <main>
@@ -365,12 +365,12 @@
         <section id="budget-tracker">
             <h2>Monthly Budget</h2>
             <div class="budget-bar-container">
-                <div class="budget-bar" style="width: 42.71149874999999%"><\/div>
+                <div class="budget-bar" style="width: 42.74174329999999%"><\/div>
             </div>
             <div class="budget-info">
                 <div class="budget-info-item">
                     <span>Spent:</span>
-                    <span>$42.71</span>
+                    <span>$42.74</span>
                 </div>
                 <div class="budget-info-item">
                     <span>Budget:</span>
@@ -450,6 +450,14 @@
                 <td>claude-sonnet-4-6</td>
                 <td>$0.099</td>
                 <td>221</td>
+            </tr>
+            <tr>
+                <td>2026-03-18 06:30</td>
+                <td>d1612dde-1d76-45f0-9e62-aeeb7dfb9c13</td>
+                <td>interactive</td>
+                <td>kimi-k2.5</td>
+                <td>$0.030</td>
+                <td>478</td>
             </tr>
             <tr>
                 <td>2026-03-17 14:00</td>
@@ -579,14 +587,6 @@
                 <td>$0.000</td>
                 <td>526,953</td>
             </tr>
-            <tr>
-                <td>2026-03-17 13:45</td>
-                <td>18fe0b36-9e4d-438b-b80f-de455e01c36d</td>
-                <td>interactive</td>
-                <td>kimi-k2.5</td>
-                <td>$0.000</td>
-                <td>0</td>
-            </tr>
                 </tbody>
             </table>
         </section>
@@ -620,7 +620,7 @@
     </main>
 
     <footer>
-        <p>Data from: 128 sessions, 3936 messages</p>
+        <p>Data from: 128 sessions, 3997 messages</p>
     </footer>
 
     <script>
@@ -635,7 +635,7 @@
                 datasets: [
                     {
                         label: 'Moonshot',
-                        data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                        data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.030244550000000002],
                         backgroundColor: '#4c8bf5',
                         stack: 'stack0'
                     },
@@ -677,7 +677,7 @@
             data: {
                 labels: ["llama3.2:3b", "claude-opus-4-5", "claude-sonnet-4-6", "kimi-k2.5"],
                 datasets: [{
-                    data: [42.17145419999999, 0.44084265, 0.0992019, 0.0],
+                    data: [42.17145419999999, 0.44084265, 0.0992019, 0.030244550000000002],
                     backgroundColor: ["#ef4444", "#d97706", "#d97706", "#4c8bf5"]
                 }]
             },
@@ -700,7 +700,7 @@
                 labels: ["llama3.2:3b", "claude-opus-4-5", "claude-sonnet-4-6", "kimi-k2.5"],
                 datasets: [{
                     label: 'Cost (USD)',
-                    data: [42.17145419999999, 0.44084265, 0.0992019, 0.0],
+                    data: [42.17145419999999, 0.44084265, 0.0992019, 0.030244550000000002],
                     backgroundColor: ["#ef4444", "#d97706", "#d97706", "#4c8bf5"]
                 }]
             },
@@ -733,7 +733,7 @@
             data: {
                 labels: ["Interactive", "Cron"],
                 datasets: [{
-                    data: [42.71149874999999, 0.0],
+                    data: [42.74174329999999, 0.0],
                     backgroundColor: ["#10b981", "#8b5cf6"]
                 }]
             },
@@ -765,6 +765,6 @@
                 // Sorting logic would go here (Slice 3)
             });
         });
-    <\/script>
+    </script>
 </body>
 </html>
