@@ -245,6 +245,7 @@ def parse_session_file(filepath: str) -> Optional[SessionData]:
     provider = None
     model = None
     session_type = None
+    model_costs = {}  # Track cost per model for accurate attribution
 
     try:
         with open(filepath, "r") as f:
@@ -285,11 +286,14 @@ def parse_session_file(filepath: str) -> Optional[SessionData]:
                     logging.warning(f"Invalid timestamp in {filepath}:{line_num}: {e}")
                     continue
 
-                # Extract provider and model (use first message's values)
+                # Extract provider from first message
                 if provider is None:
                     provider = message.get("provider", "unknown")
-                if model is None:
-                    model = message.get("model", "unknown")
+
+                # Track cost per model for accurate attribution
+                msg_model = message.get("model", "unknown")
+                msg_cost = cost_data.get("total", 0.0)
+                model_costs[msg_model] = model_costs.get(msg_model, 0) + msg_cost
 
                 # Detect session type from first message content
                 if session_type is None:
@@ -312,13 +316,19 @@ def parse_session_file(filepath: str) -> Optional[SessionData]:
     if message_count == 0:
         return None
 
+    # Attribute session to model with highest total cost
+    if model_costs:
+        model = max(model_costs, key=model_costs.get)
+    else:
+        model = "unknown"
+
     return SessionData(
         session_id=session_id,
         start_timestamp=start_timestamp,
         end_timestamp=end_timestamp,
         session_type=session_type or "interactive",
         provider=provider or "unknown",
-        model=model or "unknown",
+        model=model,
         total_input=total_input,
         total_output=total_output,
         total_cache_read=total_cache_read,

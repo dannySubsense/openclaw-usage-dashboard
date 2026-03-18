@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenClaw Token Usage Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"><\/script>
     <style>
         * {
             margin: 0;
@@ -13,9 +13,9 @@
         }
 
         :root {
-            --bg-primary: #0f172a;
-            --bg-cards: #1e293b;
-            --text-primary: #f1f5f9;
+            --bg-primary: #ffffff;
+            --bg-cards: #f0f0f0;
+            --text-primary: #000000;
             --text-secondary: #cbd5e1;
             --border-color: #475569;
             --color-moonshot: #4c8bf5;
@@ -341,7 +341,7 @@
 <body>
     <header>
         <h1>OpenClaw Token Usage Dashboard</h1>
-        <div id="generated-time">Generated: 2026-03-18 08:22 UTC</div>
+        <div id="generated-time">Generated: 2026-03-18 06:41 UTC</div>
     </header>
 
     <main>
@@ -350,8 +350,9 @@
             <h2>Live Balance</h2>
             <div class="grid grid-2">
                 <div class="card moonshot">
-                    <div class="card-label">Moonshot Balance (Remaining)</div>
-                    <div class="card-value">$82.69</div>
+                    <div class="card-label">Moonshot Balance</div>
+                    <div class="card-value">N/A</div>
+                    <div class="card-label" style="margin-top: 0.5rem;">N/A</div>
                 </div>
                 <div class="card anthropic">
                     <div class="card-label">Anthropic Spend</div>
@@ -364,12 +365,12 @@
         <section id="budget-tracker">
             <h2>Monthly Budget</h2>
             <div class="budget-bar-container">
-                <div class="budget-bar" style="width: 48.41511389999999%"></div>
+                <div class="budget-bar" style="width: 42.74174329999999%"><\/div>
             </div>
             <div class="budget-info">
                 <div class="budget-info-item">
                     <span>Spent:</span>
-                    <span>$48.42</span>
+                    <span>$42.74</span>
                 </div>
                 <div class="budget-info-item">
                     <span>Budget:</span>
@@ -377,7 +378,7 @@
                 </div>
                 <div class="budget-info-item">
                     <span>Progress:</span>
-                    <span>48.4%</span>
+                    <span>42.7%</span>
                 </div>
             </div>
         </section>
@@ -386,7 +387,7 @@
         <section id="daily-spend">
             <h2>Daily Spend</h2>
             <div class="chart-container">
-                <canvas id="daily-chart"></canvas>
+                <canvas id="daily-chart"><\/canvas>
             </div>
         </section>
 
@@ -395,10 +396,10 @@
             <h2>Model Breakdown</h2>
             <div class="charts-grid">
                 <div class="chart-container">
-                    <canvas id="model-pie-chart"></canvas>
+                    <canvas id="model-pie-chart"><\/canvas>
                 </div>
                 <div class="chart-container">
-                    <canvas id="model-bar-chart"></canvas>
+                    <canvas id="model-bar-chart"><\/canvas>
                 </div>
             </div>
         </section>
@@ -407,7 +408,7 @@
         <section id="session-type">
             <h2>Session Type Summary</h2>
             <div class="chart-container">
-                <canvas id="session-type-chart"></canvas>
+                <canvas id="session-type-chart"><\/canvas>
             </div>
         </section>
 
@@ -430,23 +431,15 @@
                 <td>2026-03-10 04:10</td>
                 <td>ba5603e0-b395-4ec7-bbd0-187162a5bd17</td>
                 <td>interactive</td>
-                <td>claude-sonnet-4-6</td>
+                <td>llama3.2:3b</td>
                 <td>$42.171</td>
                 <td>5,164,066</td>
-            </tr>
-            <tr>
-                <td>2026-03-18 04:00</td>
-                <td>6fb4aaef-4f69-4b21-a358-a783a56438db</td>
-                <td>interactive</td>
-                <td>claude-sonnet-4-6</td>
-                <td>$5.543</td>
-                <td>173,823</td>
             </tr>
             <tr>
                 <td>2026-02-24 09:46</td>
                 <td>6b185ec6-e250-4f03-91f3-e6ae12da4e42</td>
                 <td>interactive</td>
-                <td>claude-sonnet-4-6</td>
+                <td>claude-opus-4-5</td>
                 <td>$0.441</td>
                 <td>3,512</td>
             </tr>
@@ -459,36 +452,28 @@
                 <td>221</td>
             </tr>
             <tr>
-                <td>2026-03-18 08:00</td>
-                <td>ddec1ec6-cd2c-45f9-9711-125e723d9881</td>
-                <td>interactive</td>
-                <td>claude-haiku-4-5</td>
-                <td>$0.067</td>
-                <td>357</td>
-            </tr>
-            <tr>
-                <td>2026-03-18 07:00</td>
-                <td>799aa602-40ae-4dc5-bc1d-deb03b153154</td>
-                <td>interactive</td>
-                <td>claude-haiku-4-5</td>
-                <td>$0.034</td>
-                <td>548</td>
-            </tr>
-            <tr>
                 <td>2026-03-18 06:30</td>
                 <td>d1612dde-1d76-45f0-9e62-aeeb7dfb9c13</td>
                 <td>interactive</td>
-                <td>claude-haiku-4-5</td>
+                <td>kimi-k2.5</td>
                 <td>$0.030</td>
                 <td>478</td>
             </tr>
             <tr>
-                <td>2026-03-18 06:45</td>
-                <td>2793add5-636d-42b1-9cbd-5d8d51d9498e</td>
+                <td>2026-03-17 14:00</td>
+                <td>02d1a981-e35b-4b72-b331-f29b83918858</td>
                 <td>interactive</td>
-                <td>claude-haiku-4-5</td>
-                <td>$0.030</td>
-                <td>249</td>
+                <td>kimi-k2.5</td>
+                <td>$0.000</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>2026-03-17 08:15</td>
+                <td>03369924-ea58-4b3e-85c5-d311b495f59d</td>
+                <td>interactive</td>
+                <td>kimi-k2.5</td>
+                <td>$0.000</td>
+                <td>0</td>
             </tr>
             <tr>
                 <td>2026-03-17 22:45</td>
@@ -539,14 +524,6 @@
                 <td>0</td>
             </tr>
             <tr>
-                <td>2026-03-18 08:19</td>
-                <td>0cdf0ccf-3ea2-4c81-b6d0-d8050c7ed4cd</td>
-                <td>interactive</td>
-                <td>kimi-k2.5</td>
-                <td>$0.000</td>
-                <td>9,743</td>
-            </tr>
-            <tr>
                 <td>2026-03-17 18:15</td>
                 <td>0d1480ff-5ed3-42e4-98c5-89f055bc9cbf</td>
                 <td>interactive</td>
@@ -586,6 +563,30 @@
                 <td>$0.000</td>
                 <td>0</td>
             </tr>
+            <tr>
+                <td>2026-03-17 11:30</td>
+                <td>17094c38-2af8-4d52-9f05-9759c430d6ab</td>
+                <td>interactive</td>
+                <td>kimi-k2.5</td>
+                <td>$0.000</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>2026-03-17 14:01</td>
+                <td>18047725-966b-4d86-b389-c47a457f4df4</td>
+                <td>interactive</td>
+                <td>kimi-k2.5</td>
+                <td>$0.000</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>2026-03-05 12:34</td>
+                <td>183f8407-3c1f-4f4d-b959-d4e93ebc6b7d</td>
+                <td>interactive</td>
+                <td>kimi-k2.5</td>
+                <td>$0.000</td>
+                <td>526,953</td>
+            </tr>
                 </tbody>
             </table>
         </section>
@@ -593,17 +594,6 @@
         <!-- Section 7: Anomalies -->
         <section id="anomalies">
             <h2>Anomaly Flags</h2>
-        <div class="anomaly-card">
-            <div class="anomaly-header">
-                <span class="anomaly-model">claude-sonnet-4-6</span>
-                <span class="anomaly-cost">$5.543</span>
-            </div>
-            <div class="anomaly-details">
-                <p><strong>Session:</strong> 6fb4aaef-4f69-4b21-a358-a783a56438db</p>
-                <p><strong>Timestamp:</strong> 2026-03-18 04:00</p>
-                <p><strong>Reason:</strong> Fallback triggered: Kimi unavailable</p>
-            </div>
-        </div>
         <div class="anomaly-card">
             <div class="anomaly-header">
                 <span class="anomaly-model">claude-sonnet-4-6</span>
@@ -617,18 +607,7 @@
         </div>
         <div class="anomaly-card">
             <div class="anomaly-header">
-                <span class="anomaly-model">claude-sonnet-4-6</span>
-                <span class="anomaly-cost">$42.171</span>
-            </div>
-            <div class="anomaly-details">
-                <p><strong>Session:</strong> ba5603e0-b395-4ec7-bbd0-187162a5bd17</p>
-                <p><strong>Timestamp:</strong> 2026-03-10 04:10</p>
-                <p><strong>Reason:</strong> Fallback triggered: Kimi unavailable</p>
-            </div>
-        </div>
-        <div class="anomaly-card">
-            <div class="anomaly-header">
-                <span class="anomaly-model">claude-sonnet-4-6</span>
+                <span class="anomaly-model">claude-opus-4-5</span>
                 <span class="anomaly-cost">$0.441</span>
             </div>
             <div class="anomaly-details">
@@ -641,7 +620,7 @@
     </main>
 
     <footer>
-        <p>Data from: 123 sessions, 4100 messages</p>
+        <p>Data from: 128 sessions, 3997 messages</p>
     </footer>
 
     <script>
@@ -656,7 +635,7 @@
                 datasets: [
                     {
                         label: 'Moonshot',
-                        data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.703615150000003],
+                        data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.030244550000000002],
                         backgroundColor: '#4c8bf5',
                         stack: 'stack0'
                     },
@@ -696,10 +675,10 @@
         const pieChart = new Chart(pieCtx, {
             type: 'pie',
             data: {
-                labels: ["claude-sonnet-4-6", "claude-haiku-4-5", "kimi-k2.5", "llama3.2:3b"],
+                labels: ["llama3.2:3b", "claude-opus-4-5", "claude-sonnet-4-6", "kimi-k2.5"],
                 datasets: [{
-                    data: [48.25405719999999, 0.1610567, 0.0, 0.0],
-                    backgroundColor: ["#d97706", "#d97706", "#4c8bf5", "#ef4444"]
+                    data: [42.17145419999999, 0.44084265, 0.0992019, 0.030244550000000002],
+                    backgroundColor: ["#ef4444", "#d97706", "#d97706", "#4c8bf5"]
                 }]
             },
             options: {
@@ -718,11 +697,11 @@
         const barChart = new Chart(barCtx, {
             type: 'bar',
             data: {
-                labels: ["claude-sonnet-4-6", "claude-haiku-4-5", "kimi-k2.5", "llama3.2:3b"],
+                labels: ["llama3.2:3b", "claude-opus-4-5", "claude-sonnet-4-6", "kimi-k2.5"],
                 datasets: [{
                     label: 'Cost (USD)',
-                    data: [48.25405719999999, 0.1610567, 0.0, 0.0],
-                    backgroundColor: ["#d97706", "#d97706", "#4c8bf5", "#ef4444"]
+                    data: [42.17145419999999, 0.44084265, 0.0992019, 0.030244550000000002],
+                    backgroundColor: ["#ef4444", "#d97706", "#d97706", "#4c8bf5"]
                 }]
             },
             options: {
@@ -754,7 +733,7 @@
             data: {
                 labels: ["Interactive", "Cron"],
                 datasets: [{
-                    data: [48.41511389999999, 0.0],
+                    data: [42.74174329999999, 0.0],
                     backgroundColor: ["#10b981", "#8b5cf6"]
                 }]
             },
@@ -786,6 +765,6 @@
                 // Sorting logic would go here (Slice 3)
             });
         });
-    </script>
+    <\/script>
 </body>
 </html>

@@ -137,3 +137,28 @@
 2026-03-18 07:14:07,763 - INFO - Moonshot balance fetched: ¥83
 2026-03-18 07:14:07,765 - INFO - Dashboard generated: dashboard.html
 2026-03-18 07:14:07,765 - INFO - Processed 128 sessions, 4106 messages
+2026-03-18 07:31:24,749 - INFO - Starting token usage dashboard generation
+2026-03-18 07:31:25,075 - INFO - Parsed 129 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 07:31:25,417 - INFO - Moonshot balance fetched: ¥83
+2026-03-18 07:31:25,419 - INFO - Dashboard generated: dashboard.html
+2026-03-18 07:31:25,420 - INFO - Processed 129 sessions, 4145 messages
+2026-03-18 07:32:18,942 - INFO - Starting token usage dashboard generation
+2026-03-18 07:32:19,255 - INFO - Parsed 129 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 07:32:19,603 - INFO - Moonshot balance fetched: ¥83
+2026-03-18 07:32:19,605 - INFO - Dashboard generated: dashboard.html
+2026-03-18 07:32:19,605 - INFO - Processed 129 sessions, 4153 messages
+2026-03-18 07:32:25,160 - INFO - Starting token usage dashboard generation
+2026-03-18 07:32:25,474 - INFO - Parsed 129 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 07:32:25,825 - INFO - Moonshot balance fetched: ¥83
+2026-03-18 07:32:25,827 - INFO - Dashboard generated: dashboard.html
+2026-03-18 07:32:25,828 - INFO - Processed 129 sessions, 4155 messages
+2026-03-18 08:20:53,265 - INFO - Starting token usage dashboard generation
+2026-03-18 08:20:53,600 - INFO - Parsed 122 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 08:20:53,922 - INFO - Moonshot balance fetched: ¥83
+2026-03-18 08:20:53,924 - INFO - Dashboard generated: dashboard.html
+2026-03-18 08:20:53,925 - INFO - Processed 122 sessions, 4094 messages
+2026-03-18 08:22:55,287 - INFO - Starting token usage dashboard generation
+2026-03-18 08:22:55,594 - INFO - Parsed 123 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 08:22:55,956 - INFO - Moonshot balance fetched: ¥83
+2026-03-18 08:22:55,958 - INFO - Dashboard generated: dashboard.html
+2026-03-18 08:22:55,958 - INFO - Processed 123 sessions, 4100 messages
