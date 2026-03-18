@@ -528,7 +528,7 @@ def generate_html(data: DashboardData) -> str:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenClaw Token Usage Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"><\/script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {{
             margin: 0;
@@ -910,7 +910,7 @@ def generate_html(data: DashboardData) -> str:
         <section id="daily-spend">
             <h2>Daily Spend</h2>
             <div class="chart-container">
-                <canvas id="daily-chart"><\/canvas>
+                <canvas id="daily-chart"></canvas>
             </div>
         </section>
 
@@ -919,10 +919,10 @@ def generate_html(data: DashboardData) -> str:
             <h2>Model Breakdown</h2>
             <div class="charts-grid">
                 <div class="chart-container">
-                    <canvas id="model-pie-chart"><\/canvas>
+                    <canvas id="model-pie-chart"></canvas>
                 </div>
                 <div class="chart-container">
-                    <canvas id="model-bar-chart"><\/canvas>
+                    <canvas id="model-bar-chart"></canvas>
                 </div>
             </div>
         </section>
@@ -931,7 +931,7 @@ def generate_html(data: DashboardData) -> str:
         <section id="session-type">
             <h2>Session Type Summary</h2>
             <div class="chart-container">
-                <canvas id="session-type-chart"><\/canvas>
+                <canvas id="session-type-chart"></canvas>
             </div>
         </section>
 
@@ -1108,7 +1108,7 @@ def generate_html(data: DashboardData) -> str:
                 // Sorting logic would go here (Slice 3)
             }});
         }});
-    <\/script>
+    </script>
 </body>
 </html>"""
 

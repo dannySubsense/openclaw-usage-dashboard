@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenClaw Token Usage Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"><\/script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -341,7 +341,7 @@
 <body>
     <header>
         <h1>OpenClaw Token Usage Dashboard</h1>
-        <div id="generated-time">Generated: 2026-03-18 07:31 UTC</div>
+        <div id="generated-time">Generated: 2026-03-18 07:32 UTC</div>
     </header>
 
     <main>
@@ -364,12 +364,12 @@
         <section id="budget-tracker">
             <h2>Monthly Budget</h2>
             <div class="budget-bar-container">
-                <div class="budget-bar" style="width: 45.07675674999999%"></div>
+                <div class="budget-bar" style="width: 45.239026399999986%"></div>
             </div>
             <div class="budget-info">
                 <div class="budget-info-item">
                     <span>Spent:</span>
-                    <span>$45.08</span>
+                    <span>$45.24</span>
                 </div>
                 <div class="budget-info-item">
                     <span>Budget:</span>
@@ -377,7 +377,7 @@
                 </div>
                 <div class="budget-info-item">
                     <span>Progress:</span>
-                    <span>45.1%</span>
+                    <span>45.2%</span>
                 </div>
             </div>
         </section>
@@ -386,7 +386,7 @@
         <section id="daily-spend">
             <h2>Daily Spend</h2>
             <div class="chart-container">
-                <canvas id="daily-chart"><\/canvas>
+                <canvas id="daily-chart"></canvas>
             </div>
         </section>
 
@@ -395,10 +395,10 @@
             <h2>Model Breakdown</h2>
             <div class="charts-grid">
                 <div class="chart-container">
-                    <canvas id="model-pie-chart"><\/canvas>
+                    <canvas id="model-pie-chart"></canvas>
                 </div>
                 <div class="chart-container">
-                    <canvas id="model-bar-chart"><\/canvas>
+                    <canvas id="model-bar-chart"></canvas>
                 </div>
             </div>
         </section>
@@ -407,7 +407,7 @@
         <section id="session-type">
             <h2>Session Type Summary</h2>
             <div class="chart-container">
-                <canvas id="session-type-chart"><\/canvas>
+                <canvas id="session-type-chart"></canvas>
             </div>
         </section>
 
@@ -439,8 +439,8 @@
                 <td>6fb4aaef-4f69-4b21-a358-a783a56438db</td>
                 <td>interactive</td>
                 <td>kimi-k2.5</td>
-                <td>$2.271</td>
-                <td>10,068</td>
+                <td>$2.433</td>
+                <td>11,148</td>
             </tr>
             <tr>
                 <td>2026-02-24 09:46</td>
@@ -619,7 +619,7 @@
     </main>
 
     <footer>
-        <p>Data from: 129 sessions, 4145 messages</p>
+        <p>Data from: 129 sessions, 4155 messages</p>
     </footer>
 
     <script>
@@ -634,7 +634,7 @@
                 datasets: [
                     {
                         label: 'Moonshot',
-                        data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.3652579999999994],
+                        data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.52752765],
                         backgroundColor: '#4c8bf5',
                         stack: 'stack0'
                     },
@@ -676,7 +676,7 @@
             data: {
                 labels: ["llama3.2:3b", "kimi-k2.5", "claude-opus-4-5", "claude-sonnet-4-6"],
                 datasets: [{
-                    data: [42.17145419999999, 2.3652579999999994, 0.44084265, 0.0992019],
+                    data: [42.17145419999999, 2.52752765, 0.44084265, 0.0992019],
                     backgroundColor: ["#ef4444", "#4c8bf5", "#d97706", "#d97706"]
                 }]
             },
@@ -699,7 +699,7 @@
                 labels: ["llama3.2:3b", "kimi-k2.5", "claude-opus-4-5", "claude-sonnet-4-6"],
                 datasets: [{
                     label: 'Cost (USD)',
-                    data: [42.17145419999999, 2.3652579999999994, 0.44084265, 0.0992019],
+                    data: [42.17145419999999, 2.52752765, 0.44084265, 0.0992019],
                     backgroundColor: ["#ef4444", "#4c8bf5", "#d97706", "#d97706"]
                 }]
             },
@@ -732,7 +732,7 @@
             data: {
                 labels: ["Interactive", "Cron"],
                 datasets: [{
-                    data: [45.07675674999999, 0.0],
+                    data: [45.239026399999986, 0.0],
                     backgroundColor: ["#10b981", "#8b5cf6"]
                 }]
             },
@@ -764,6 +764,6 @@
                 // Sorting logic would go here (Slice 3)
             });
         });
-    <\/script>
+    </script>
 </body>
 </html>
