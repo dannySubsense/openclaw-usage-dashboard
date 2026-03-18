@@ -501,7 +501,8 @@ def generate_html(data: DashboardData) -> str:
         cost_display = f"${session.total_cost:.3f}"
         tokens_display = f"{session.total_input + session.total_output:,}"
 
-        top_sessions_rows.append(f"""            <tr>
+        total_tokens = session.total_input + session.total_output
+        top_sessions_rows.append(f"""            <tr data-timestamp="{session.start_timestamp.timestamp()}" data-cost="{session.total_cost}" data-tokens="{total_tokens}" data-session="{html.escape(session.session_id)}" data-model="{html.escape(session.model)}" data-type="{html.escape(session.session_type)}">
                 <td>{html.escape(timestamp_display)}</td>
                 <td>{html.escape(session.session_id)}</td>
                 <td>{html.escape(session.session_type)}</td>
@@ -715,10 +716,27 @@ def generate_html(data: DashboardData) -> str:
             color: var(--text-primary);
             cursor: pointer;
             user-select: none;
+            transition: background-color 0.2s ease;
         }}
 
         th:hover {{
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.1);
+        }}
+
+        .sort-indicator {{
+            margin-left: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }}
+
+        th.sort-asc .sort-indicator::after {{
+            content: "▲";
+            color: var(--color-interactive);
+        }}
+
+        th.sort-desc .sort-indicator::after {{
+            content: "▼";
+            color: var(--color-interactive);
         }}
 
         td {{
@@ -955,12 +973,12 @@ def generate_html(data: DashboardData) -> str:
             <table id="sessions-table">
                 <thead>
                     <tr>
-                        <th data-sort="timestamp">Timestamp</th>
-                        <th data-sort="session_id">Session ID</th>
-                        <th data-sort="type">Type</th>
-                        <th data-sort="model">Model</th>
-                        <th data-sort="cost">Cost</th>
-                        <th data-sort="tokens">Tokens</th>
+                        <th data-sort="timestamp" onclick="sortTable('timestamp')">Timestamp <span class="sort-indicator" id="sort-timestamp"></span></th>
+                        <th data-sort="session_id" onclick="sortTable('session')">Session ID <span class="sort-indicator" id="sort-session"></span></th>
+                        <th data-sort="type" onclick="sortTable('type')">Type <span class="sort-indicator" id="sort-type"></span></th>
+                        <th data-sort="model" onclick="sortTable('model')">Model <span class="sort-indicator" id="sort-model"></span></th>
+                        <th data-sort="cost" onclick="sortTable('cost')">Cost <span class="sort-indicator" id="sort-cost"></span></th>
+                        <th data-sort="tokens" onclick="sortTable('tokens')">Tokens <span class="sort-indicator" id="sort-tokens"></span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1106,22 +1124,73 @@ def generate_html(data: DashboardData) -> str:
             }}
         }});
 
-        // Table sorting (placeholder for client-side sorting)
+        // Table sorting functionality
         let currentSort = null;
         let sortDirection = 'asc';
 
-        document.querySelectorAll('th[data-sort]').forEach(th => {{
-            th.addEventListener('click', () => {{
-                const sortBy = th.dataset.sort;
-                if (currentSort === sortBy) {{
-                    sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-                }} else {{
-                    currentSort = sortBy;
-                    sortDirection = 'asc';
-                }}
-                // Sorting logic would go here (Slice 3)
+        function sortTable(column) {{
+            const table = document.getElementById('sessions-table');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            // Toggle direction if clicking same column
+            if (currentSort === column) {{
+                sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+            }} else {{
+                currentSort = column;
+                sortDirection = 'asc';
+            }}
+
+            // Update header visual indicators
+            document.querySelectorAll('th').forEach(th => {{
+                th.classList.remove('sort-asc', 'sort-desc');
             }});
-        }});
+            const activeHeader = document.querySelector(`th[onclick="sortTable('${{column}}')"]`);
+            if (activeHeader) {{
+                activeHeader.classList.add(sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+            }}
+
+            // Sort rows
+            rows.sort((a, b) => {{
+                let valA, valB;
+
+                switch(column) {{
+                    case 'timestamp':
+                        valA = parseFloat(a.dataset.timestamp);
+                        valB = parseFloat(b.dataset.timestamp);
+                        break;
+                    case 'cost':
+                        valA = parseFloat(a.dataset.cost);
+                        valB = parseFloat(b.dataset.cost);
+                        break;
+                    case 'tokens':
+                        valA = parseInt(a.dataset.tokens);
+                        valB = parseInt(b.dataset.tokens);
+                        break;
+                    case 'session':
+                        valA = a.dataset.session.toLowerCase();
+                        valB = b.dataset.session.toLowerCase();
+                        break;
+                    case 'model':
+                        valA = a.dataset.model.toLowerCase();
+                        valB = b.dataset.model.toLowerCase();
+                        break;
+                    case 'type':
+                        valA = a.dataset.type.toLowerCase();
+                        valB = b.dataset.type.toLowerCase();
+                        break;
+                    default:
+                        return 0;
+                }}
+
+                if (valA < valB) return sortDirection === 'asc' ? -1 : 1;
+                if (valA > valB) return sortDirection === 'asc' ? 1 : -1;
+                return 0;
+            }});
+
+            // Re-append rows in sorted order
+            rows.forEach(row => tbody.appendChild(row));
+        }}
     </script>
 </body>
 </html>"""

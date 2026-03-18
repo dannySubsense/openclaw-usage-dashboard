@@ -162,3 +162,18 @@
 2026-03-18 08:22:55,956 - INFO - Moonshot balance fetched: ¥83
 2026-03-18 08:22:55,958 - INFO - Dashboard generated: dashboard.html
 2026-03-18 08:22:55,958 - INFO - Processed 123 sessions, 4100 messages
+2026-03-18 08:34:51,493 - INFO - Starting token usage dashboard generation
+2026-03-18 08:34:51,812 - INFO - Parsed 124 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 08:34:52,158 - INFO - Moonshot balance fetched: ¥83
+2026-03-18 08:34:52,188 - INFO - Dashboard generated: dashboard.html
+2026-03-18 08:34:52,188 - INFO - Processed 124 sessions, 4128 messages
+2026-03-18 08:41:46,057 - INFO - Starting token usage dashboard generation
+2026-03-18 08:41:46,370 - INFO - Parsed 124 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 08:41:46,720 - INFO - Moonshot balance fetched: ¥82
+2026-03-18 08:41:46,748 - INFO - Dashboard generated: dashboard.html
+2026-03-18 08:41:46,748 - INFO - Processed 124 sessions, 4146 messages
+2026-03-18 08:44:06,586 - INFO - Starting token usage dashboard generation
+2026-03-18 08:44:06,906 - INFO - Parsed 125 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 08:44:07,245 - INFO - Moonshot balance fetched: ¥82
+2026-03-18 08:44:07,274 - INFO - Dashboard generated: dashboard.html
+2026-03-18 08:44:07,274 - INFO - Processed 125 sessions, 4155 messages
