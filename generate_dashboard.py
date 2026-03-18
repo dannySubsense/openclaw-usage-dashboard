@@ -13,7 +13,7 @@ import logging
 import os
 import sys
 from dataclasses import dataclass
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -141,25 +141,79 @@ def setup_logging(verbose: bool = False) -> None:
     root_logger.addHandler(console_handler)
 
 
+def check_env_file_permissions() -> None:
+    """Check if .env file is world-readable and warn if so."""
+    env_path = Path(".env")
+    if not env_path.exists():
+        return
+
+    try:
+        stat_info = env_path.stat()
+        # Check if world-readable (0o004 bit set)
+        if stat_info.st_mode & 0o004:
+            logging.warning(
+                f"Security warning: {env_path} is world-readable. "
+                "Consider changing permissions to 600 (chmod 600 .env)"
+            )
+    except OSError as e:
+        logging.warning(f"Could not check .env permissions: {e}")
+
+
+def generate_error_dashboard(error_message: str, output_file: str) -> None:
+    """
+    Generate minimal error dashboard for critical failures.
+
+    Args:
+        error_message: Error message to display
+        output_file: Path where error dashboard should be written
+    """
+    error_html = f"""<!DOCTYPE html>
+<html>
+<head><title>Dashboard Error</title></head>
+<body style="font-family: sans-serif; padding: 2rem;">
+    <h1>Error Generating Dashboard</h1>
+    <p style="color: red;">{html.escape(error_message)}</p>
+    <p>Please check the configuration and try again.</p>
+</body>
+</html>"""
+
+    try:
+        with open(output_file, "w") as f:
+            f.write(error_html)
+        logging.info(f"Error dashboard written to {output_file}")
+    except (IOError, OSError) as e:
+        logging.error(f"Failed to write error dashboard to {output_file}: {e}")
+
+
 # ============================================================================
 # SLICE 1: DATA PARSING
 # ============================================================================
 
 
-def detect_session_type(message_content: str) -> str:
+def detect_session_type(message_content) -> str:
     """
     Detect if session is cron or interactive.
 
     Cron sessions have "[cron:" prefix in message content.
 
     Args:
-        message_content: Message content string
+        message_content: Message content (string or list of content blocks)
 
     Returns:
         "cron" or "interactive"
     """
-    if message_content and message_content.strip().startswith("[cron:"):
-        return "cron"
+    # Handle list of content blocks (e.g., [{"type": "text", "text": "..."}])
+    if isinstance(message_content, list):
+        for block in message_content:
+            if isinstance(block, dict) and block.get("type") == "text":
+                text = block.get("text", "")
+                if text and text.strip().startswith("[cron:"):
+                    return "cron"
+    # Handle string content
+    elif isinstance(message_content, str):
+        if message_content and message_content.strip().startswith("[cron:"):
+            return "cron"
+
     return "interactive"
 
 
@@ -293,7 +347,8 @@ def parse_all_sessions(config: Config) -> List[SessionData]:
         return []
 
     sessions = []
-    cutoff_date = datetime.now() - timedelta(days=config.days_back)
+    # Use timezone-aware datetime for comparison
+    cutoff_date = datetime.now(timezone.utc) - timedelta(days=config.days_back)
 
     # Find all .jsonl files
     jsonl_files = sorted(session_dir.glob("*.jsonl"))
@@ -1067,17 +1122,353 @@ def generate_html(data: DashboardData) -> str:
 
 
 # ============================================================================
+# CONFIGURATION LOADING
+# ============================================================================
+
+
+def load_config() -> Config:
+    """
+    Load configuration from .env file and CLI arguments.
+
+    CLI arguments override environment variables, which override defaults.
+
+    Returns:
+        Config object with all settings
+    """
+    # Load .env file
+    load_dotenv()
+
+    # Parse CLI arguments
+    parser = argparse.ArgumentParser(
+        description="Generate OpenClaw token usage dashboard"
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        default=os.getenv("OUTPUT_FILE", "dashboard.html"),
+        help="Output HTML file (default: dashboard.html)",
+    )
+    parser.add_argument(
+        "-d",
+        "--days",
+        type=int,
+        default=int(os.getenv("DAYS_BACK", "30")),
+        help="Number of days to analyze (default: 30)",
+    )
+    parser.add_argument(
+        "--session-dir",
+        default=os.getenv("SESSION_DIR", "~/.openclaw/agents/main/sessions"),
+        help="Session files directory",
+    )
+    parser.add_argument(
+        "--no-api",
+        action="store_true",
+        help="Skip Moonshot API balance fetch",
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Enable verbose logging",
+    )
+    args = parser.parse_args()
+
+    # Load configuration with validation
+    session_dir = args.session_dir
+    output_file = args.output
+    days_back = args.days
+    verbose = args.verbose
+
+    # Validate and load numeric config values with defaults
+    try:
+        monthly_budget_usd = float(os.getenv("MONTHLY_BUDGET_USD", "100.0"))
+    except (ValueError, TypeError):
+        logging.warning("Invalid MONTHLY_BUDGET_USD in .env, using default: 100.0")
+        monthly_budget_usd = 100.0
+
+    try:
+        warning_threshold_usd = float(os.getenv("WARNING_THRESHOLD_USD", "75.0"))
+    except (ValueError, TypeError):
+        logging.warning("Invalid WARNING_THRESHOLD_USD in .env, using default: 75.0")
+        warning_threshold_usd = 75.0
+
+    try:
+        cny_to_usd_rate = float(os.getenv("CNY_TO_USD_RATE", "0.14"))
+        if not (0.01 <= cny_to_usd_rate <= 1.0):
+            raise ValueError("Rate must be between 0.01 and 1.0")
+    except (ValueError, TypeError):
+        logging.warning("Invalid CNY_TO_USD_RATE in .env, using default: 0.14")
+        cny_to_usd_rate = 0.14
+
+    moonshot_api_key = os.getenv("MOONSHOT_API_KEY", "")
+    if not moonshot_api_key:
+        logging.warning("MOONSHOT_API_KEY not set, Moonshot balance will show as N/A")
+
+    config = Config(
+        session_dir=session_dir,
+        output_file=output_file,
+        moonshot_api_key=moonshot_api_key,
+        monthly_budget_usd=monthly_budget_usd,
+        warning_threshold_usd=warning_threshold_usd,
+        cny_to_usd_rate=cny_to_usd_rate,
+        days_back=days_back,
+        skip_api=args.no_api,
+        verbose=verbose,
+    )
+
+    return config
+
+
+def validate_output_path(output_file: str) -> bool:
+    """
+    Validate that output path is writable.
+
+    Args:
+        output_file: Path to output file
+
+    Returns:
+        True if writable, False otherwise
+    """
+    output_path = Path(output_file)
+    parent_dir = output_path.parent
+
+    # Create parent directory if it doesn't exist
+    try:
+        parent_dir.mkdir(parents=True, exist_ok=True)
+    except OSError as e:
+        logging.error(f"Cannot create output directory {parent_dir}: {e}")
+        return False
+
+    # Test write permission
+    try:
+        # Try to write a small test file
+        test_file = parent_dir / ".dashboard_write_test"
+        test_file.write_text("test")
+        test_file.unlink()
+        return True
+    except OSError as e:
+        logging.error(f"Output directory is not writable: {e}")
+        return False
+
+
+# ============================================================================
+# DATA AGGREGATION
+# ============================================================================
+
+
+def aggregate_data(sessions: List[SessionData], config: Config) -> DashboardData:
+    """
+    Aggregate session data into dashboard metrics.
+
+    Args:
+        sessions: List of parsed sessions
+        config: Configuration object
+
+    Returns:
+        DashboardData with aggregated metrics
+    """
+    # Initialize aggregation structures
+    daily_summaries: Dict[date, DailySummary] = {}
+    model_breakdown_map: Dict[str, ModelBreakdown] = {}
+    session_type_summary: Dict[str, float] = {"cron": 0.0, "interactive": 0.0}
+    anomalies: List[AnomalyFlag] = []
+    total_anthropic_cost = 0.0
+    total_cost = 0.0
+
+    for session in sessions:
+        # Daily aggregation
+        session_date = session.start_timestamp.date()
+        if session_date not in daily_summaries:
+            daily_summaries[session_date] = DailySummary(
+                date=session_date,
+                moonshot_cost=0.0,
+                anthropic_cost=0.0,
+                total_cost=0.0,
+                message_count=0,
+                session_count=0,
+            )
+
+        daily = daily_summaries[session_date]
+        if session.provider == "moonshot":
+            daily.moonshot_cost += session.total_cost
+        elif session.provider == "anthropic":
+            daily.anthropic_cost += session.total_cost
+        daily.total_cost += session.total_cost
+        daily.message_count += session.message_count
+        daily.session_count += 1
+
+        # Model breakdown aggregation
+        model_key = session.model
+        if model_key not in model_breakdown_map:
+            model_breakdown_map[model_key] = ModelBreakdown(
+                model=session.model,
+                provider=session.provider,
+                total_cost=0.0,
+                message_count=0,
+                token_count=0,
+            )
+
+        breakdown = model_breakdown_map[model_key]
+        breakdown.total_cost += session.total_cost
+        breakdown.message_count += session.message_count
+        breakdown.token_count += session.total_input + session.total_output
+
+        # Session type aggregation
+        session_type_summary[session.session_type] += session.total_cost
+
+        # Track Anthropic spend
+        if session.provider == "anthropic":
+            total_anthropic_cost += session.total_cost
+
+        # Detect anomalies (Sonnet/Opus usage)
+        if "sonnet" in session.model.lower() or "opus" in session.model.lower():
+            anomalies.append(
+                AnomalyFlag(
+                    session_id=session.session_id,
+                    timestamp=session.start_timestamp,
+                    model=session.model,
+                    reason="Fallback triggered: Kimi unavailable",
+                    cost=session.total_cost,
+                )
+            )
+
+        total_cost += session.total_cost
+
+    # Sort daily summaries by date
+    sorted_daily = sorted(daily_summaries.values(), key=lambda x: x.date)
+
+    # Sort sessions by cost (descending) and get top 20
+    top_sessions = sorted(sessions, key=lambda x: x.total_cost, reverse=True)[:20]
+
+    return DashboardData(
+        moonshot_balance_cny=None,
+        moonshot_balance_usd=None,
+        anthropic_total_usd=total_anthropic_cost,
+        monthly_spend=total_cost,
+        monthly_budget=config.monthly_budget_usd,
+        warning_threshold=config.warning_threshold_usd,
+        daily_summaries=sorted_daily,
+        model_breakdown=list(model_breakdown_map.values()),
+        session_type_summary=session_type_summary,
+        top_sessions=top_sessions,
+        anomalies=anomalies,
+        generated_at=datetime.now(),
+        total_sessions=len(sessions),
+        total_messages=sum(s.message_count for s in sessions),
+        parse_errors=0,
+    )
+
+
+def fetch_moonshot_balance(api_key: str) -> Optional[float]:
+    """
+    Fetch live Moonshot balance via API.
+
+    Args:
+        api_key: Moonshot API key
+
+    Returns:
+        Balance in CNY or None if API fails
+    """
+    try:
+        response = requests.get(
+            "https://api.moonshot.ai/v1/users/me/balance",
+            headers={"Authorization": f"Bearer {api_key}"},
+            timeout=10,
+        )
+        response.raise_for_status()
+        data = response.json()
+        balance_cny = data.get("available_balance")
+        if balance_cny is not None:
+            logging.info(f"Moonshot balance fetched: ¥{balance_cny:,.0f}")
+            return float(balance_cny)
+    except requests.exceptions.Timeout:
+        logging.error("Moonshot API request timed out")
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Moonshot API error: {e}")
+    except (ValueError, KeyError) as e:
+        logging.error(f"Invalid response from Moonshot API: {e}")
+
+    return None
+
+
+# ============================================================================
 # MAIN
 # ============================================================================
 
 
 def main() -> int:
-    """Main entry point."""
-    setup_logging()
+    """Main entry point with comprehensive error handling."""
+    # Load configuration
+    config = load_config()
+
+    # Setup logging after loading config to respect verbose flag
+    setup_logging(config.verbose)
     logging.info("Starting token usage dashboard generation")
 
-    # For now, just implement Slice 1 parsing
-    # Return success
+    # Check .env permissions
+    check_env_file_permissions()
+
+    # Validate output path
+    if not validate_output_path(config.output_file):
+        logging.error(f"Invalid output path: {config.output_file}")
+        generate_error_dashboard(
+            "Invalid output path. Check permissions and try again.",
+            config.output_file,
+        )
+        return 1
+
+    # Validate session directory exists
+    session_dir = Path(config.session_dir).expanduser()
+    if not session_dir.exists():
+        error_msg = f"Session directory not found: {session_dir}"
+        logging.error(error_msg)
+        generate_error_dashboard(error_msg, config.output_file)
+        return 1
+
+    # Parse all sessions
+    sessions = parse_all_sessions(config)
+    if not sessions:
+        logging.warning("No sessions found in time range")
+
+    # Aggregate data
+    dashboard_data = aggregate_data(sessions, config)
+
+    # Fetch Moonshot balance (if API key provided and not skipped)
+    if config.moonshot_api_key and not config.skip_api:
+        balance_cny = fetch_moonshot_balance(config.moonshot_api_key)
+        if balance_cny is not None:
+            dashboard_data.moonshot_balance_cny = balance_cny
+            dashboard_data.moonshot_balance_usd = balance_cny * config.cny_to_usd_rate
+    else:
+        if not config.moonshot_api_key:
+            logging.info("Skipping Moonshot API: no API key configured")
+        else:
+            logging.info("Skipping Moonshot API: --no-api flag set")
+
+    # Generate HTML
+    try:
+        html_content = generate_html(dashboard_data)
+    except Exception as e:
+        logging.error(f"Error generating HTML: {e}")
+        generate_error_dashboard(
+            "Failed to generate dashboard HTML. Check logs for details.",
+            config.output_file,
+        )
+        return 1
+
+    # Write output file
+    try:
+        with open(config.output_file, "w") as f:
+            f.write(html_content)
+        logging.info(f"Dashboard generated: {config.output_file}")
+        logging.info(
+            f"Processed {len(sessions)} sessions, "
+            f"{dashboard_data.total_messages} messages"
+        )
+    except (IOError, OSError) as e:
+        logging.error(f"Failed to write output file: {e}")
+        return 1
+
     return 0
 
 
