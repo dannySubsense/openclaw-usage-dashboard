@@ -1,0 +1,103 @@
+2026-03-18 05:56:16,601 - INFO - Starting token usage dashboard generation
+2026-03-18 05:56:16,602 - ERROR - Session directory not found: /nonexistent
+2026-03-18 05:56:16,602 - INFO - Error dashboard written to dashboard.html
+2026-03-18 05:56:19,865 - INFO - Starting token usage dashboard generation
+2026-03-18 05:56:19,866 - ERROR - Session directory not found: /nonexistent
+2026-03-18 05:56:19,866 - INFO - Error dashboard written to dashboard.html
+2026-03-18 05:56:25,294 - INFO - Starting token usage dashboard generation
+2026-03-18 05:56:38,494 - INFO - Starting token usage dashboard generation
+2026-03-18 05:56:59,078 - INFO - Starting token usage dashboard generation
+2026-03-18 05:56:59,408 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 05:56:59,409 - INFO - Skipping Moonshot API: --no-api flag set
+2026-03-18 05:56:59,410 - INFO - Dashboard generated: dashboard.html
+2026-03-18 05:56:59,410 - INFO - Processed 128 sessions, 3920 messages
+2026-03-18 05:57:02,782 - INFO - Starting token usage dashboard generation
+2026-03-18 05:57:03,090 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 05:57:03,090 - INFO - Skipping Moonshot API: --no-api flag set
+2026-03-18 05:57:03,091 - INFO - Dashboard generated: dashboard.html
+2026-03-18 05:57:03,091 - INFO - Processed 128 sessions, 3920 messages
+2026-03-18 05:57:06,420 - INFO - Starting token usage dashboard generation
+2026-03-18 05:57:06,722 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 05:57:06,723 - INFO - Skipping Moonshot API: --no-api flag set
+2026-03-18 05:57:06,724 - INFO - Dashboard generated: dashboard.html
+2026-03-18 05:57:06,724 - INFO - Processed 128 sessions, 3920 messages
+2026-03-18 05:57:09,149 - INFO - Starting token usage dashboard generation
+2026-03-18 05:57:09,446 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 05:57:09,446 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 05:57:09,447 - INFO - Dashboard generated: dashboard.html
+2026-03-18 05:57:09,447 - INFO - Processed 128 sessions, 3920 messages
+2026-03-18 05:57:11,227 - INFO - Starting token usage dashboard generation
+2026-03-18 05:57:11,227 - ERROR - Output directory is not writable: [Errno 13] Permission denied: '/root/.dashboard_write_test'
+2026-03-18 05:57:11,227 - ERROR - Invalid output path: /root/dashboard.html
+2026-03-18 05:57:11,227 - ERROR - Failed to write error dashboard to /root/dashboard.html: [Errno 13] Permission denied: '/root/dashboard.html'
+2026-03-18 05:57:13,558 - INFO - Starting token usage dashboard generation
+2026-03-18 05:57:13,865 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 05:57:13,865 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 05:57:13,866 - INFO - Dashboard generated: dashboard.html
+2026-03-18 05:57:13,866 - INFO - Processed 128 sessions, 3920 messages
+2026-03-18 06:05:50,777 - INFO - Starting token usage dashboard generation
+2026-03-18 06:05:51,087 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:05:51,088 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 06:05:51,088 - INFO - Dashboard generated: dashboard.html
+2026-03-18 06:05:51,089 - INFO - Processed 128 sessions, 3935 messages
+2026-03-18 06:06:01,809 - INFO - Starting token usage dashboard generation
+2026-03-18 06:06:01,813 - DEBUG - Skipping session 0a4be04f-fd4b-4e81-bb62-3a5e547e92bc (outside time range)
+2026-03-18 06:06:01,851 - DEBUG - Skipping session 113dd08b-d9e8-48aa-99b9-3be1cc4c6c03 (outside time range)
+2026-03-18 06:06:01,861 - DEBUG - Skipping session 12778532-9a59-4768-a110-3cce2acd54ba (outside time range)
+2026-03-18 06:06:01,871 - DEBUG - Skipping session 183f8407-3c1f-4f4d-b959-d4e93ebc6b7d (outside time range)
+2026-03-18 06:06:01,873 - DEBUG - Skipping session 1e6061a0-c545-4af7-91f6-9416312a75ad (outside time range)
+2026-03-18 06:06:01,884 - DEBUG - Skipping session 23613b03-9d39-4bb3-b514-031ffd8ce0ed (outside time range)
+2026-03-18 06:06:01,885 - DEBUG - Skipping session 284c15f3-2563-4205-aaa2-7d20f89dc0e9 (outside time range)
+2026-03-18 06:06:01,899 - DEBUG - Skipping session 49081729-fd59-4d3c-859e-f65a0939234d (outside time range)
+2026-03-18 06:06:01,933 - DEBUG - Skipping session 5e06c8b0-10ec-4268-83ec-607b7cb1cb0c (outside time range)
+2026-03-18 06:06:01,937 - DEBUG - Skipping session 6b185ec6-e250-4f03-91f3-e6ae12da4e42 (outside time range)
+2026-03-18 06:06:01,947 - DEBUG - Skipping session 7370d2f6-4ef4-41e2-9724-b6307822d363 (outside time range)
+2026-03-18 06:06:01,950 - DEBUG - Skipping session 74c5310e-40b8-4833-88a6-9005db99f494 (outside time range)
+2026-03-18 06:06:01,961 - DEBUG - Skipping session 78be32d7-3a61-41f2-a814-657baf548dc0 (outside time range)
+2026-03-18 06:06:01,964 - DEBUG - Skipping session 89a8f042-ff3b-47af-8baf-1acd39bdb726 (outside time range)
+2026-03-18 06:06:02,005 - DEBUG - Skipping session 955a0726-d646-4992-ac59-6e5e86d08ed8 (outside time range)
+2026-03-18 06:06:02,023 - DEBUG - Skipping session aaa04925-1ef6-4b5d-90b0-421d2b3e0768 (outside time range)
+2026-03-18 06:06:02,070 - DEBUG - Skipping session ba5603e0-b395-4ec7-bbd0-187162a5bd17 (outside time range)
+2026-03-18 06:06:02,096 - DEBUG - Skipping session bf7597a9-3d93-4983-ae22-09e5593dc939 (outside time range)
+2026-03-18 06:06:02,098 - DEBUG - Skipping session c84bb1d0-7fb4-4ca9-af5d-cc922d80cd56 (outside time range)
+2026-03-18 06:06:02,109 - DEBUG - Skipping session d3392cea-ef16-49b7-9329-7dc72e867844 (outside time range)
+2026-03-18 06:06:02,111 - DEBUG - Skipping session e275f467-3f99-4280-967f-669eff588d88 (outside time range)
+2026-03-18 06:06:02,115 - DEBUG - Skipping session faf67703-b5b4-4045-8d93-40099eb78e65 (outside time range)
+2026-03-18 06:06:02,116 - INFO - Parsed 106 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:06:02,117 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 06:06:02,117 - INFO - Dashboard generated: /tmp/test_output.html
+2026-03-18 06:06:02,118 - INFO - Processed 106 sessions, 682 messages
+2026-03-18 06:06:15,222 - INFO - Starting token usage dashboard generation
+2026-03-18 06:06:15,222 - ERROR - Session directory not found: /nonexistent
+2026-03-18 06:06:15,223 - INFO - Error dashboard written to dashboard.html
+2026-03-18 06:06:21,559 - INFO - Starting token usage dashboard generation
+2026-03-18 06:06:21,560 - ERROR - Session directory not found: /nonexistent
+2026-03-18 06:06:21,560 - INFO - Error dashboard written to dashboard.html
+2026-03-18 06:06:26,474 - INFO - Starting token usage dashboard generation
+2026-03-18 06:06:26,773 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:06:26,773 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 06:06:26,774 - INFO - Dashboard generated: dashboard.html
+2026-03-18 06:06:26,774 - INFO - Processed 128 sessions, 3936 messages
+2026-03-18 06:06:42,503 - INFO - Starting token usage dashboard generation
+2026-03-18 06:06:42,807 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:06:42,808 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 06:06:42,808 - INFO - Dashboard generated: dashboard.html
+2026-03-18 06:06:42,809 - INFO - Processed 128 sessions, 3936 messages
+2026-03-18 06:06:43,278 - INFO - Starting token usage dashboard generation
+2026-03-18 06:06:43,587 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:06:43,587 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 06:06:43,588 - INFO - Dashboard generated: /tmp/test1.html
+2026-03-18 06:06:43,588 - INFO - Processed 128 sessions, 3936 messages
+2026-03-18 06:06:43,830 - INFO - Starting token usage dashboard generation
+2026-03-18 06:06:44,133 - INFO - Parsed 106 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:06:44,134 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 06:06:44,135 - INFO - Dashboard generated: dashboard.html
+2026-03-18 06:06:44,135 - INFO - Processed 106 sessions, 683 messages
+2026-03-18 06:06:44,367 - INFO - Starting token usage dashboard generation
+2026-03-18 06:06:44,367 - ERROR - Session directory not found: /nonexistent
+2026-03-18 06:06:44,368 - INFO - Error dashboard written to dashboard.html
+2026-03-18 06:07:14,582 - INFO - Starting token usage dashboard generation
+2026-03-18 06:07:14,886 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:07:14,887 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 06:07:14,888 - INFO - Dashboard generated: dashboard.html
+2026-03-18 06:07:14,888 - INFO - Processed 128 sessions, 3936 messages
