@@ -459,11 +459,6 @@ def generate_html(data: DashboardData) -> str:
         if data.moonshot_balance_usd is None
         else f"${data.moonshot_balance_usd:,.2f}"
     )
-    moonshot_balance_cny_display = (
-        "N/A"
-        if data.moonshot_balance_cny is None
-        else f"¥{data.moonshot_balance_cny:,.0f}"
-    )
 
     # Format amounts
     anthropic_total_display = f"${data.anthropic_total_usd:,.2f}"
@@ -879,9 +874,8 @@ def generate_html(data: DashboardData) -> str:
             <h2>Live Balance</h2>
             <div class="grid grid-2">
                 <div class="card moonshot">
-                    <div class="card-label">Moonshot Balance</div>
+                    <div class="card-label">Moonshot Balance (Remaining)</div>
                     <div class="card-value">{html.escape(moonshot_balance_display)}</div>
-                    <div class="card-label" style="margin-top: 0.5rem;">{html.escape(moonshot_balance_cny_display)}</div>
                 </div>
                 <div class="card anthropic">
                     <div class="card-label">Anthropic Spend</div>
@@ -1435,10 +1429,10 @@ def main() -> int:
 
     # Fetch Moonshot balance (if API key provided and not skipped)
     if config.moonshot_api_key and not config.skip_api:
-        balance_cny = fetch_moonshot_balance(config.moonshot_api_key)
-        if balance_cny is not None:
-            dashboard_data.moonshot_balance_cny = balance_cny
-            dashboard_data.moonshot_balance_usd = balance_cny * config.cny_to_usd_rate
+        balance_usd = fetch_moonshot_balance(config.moonshot_api_key)
+        if balance_usd is not None:
+            dashboard_data.moonshot_balance_usd = balance_usd
+            dashboard_data.moonshot_balance_cny = None
     else:
         if not config.moonshot_api_key:
             logging.info("Skipping Moonshot API: no API key configured")
