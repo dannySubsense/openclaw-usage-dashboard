@@ -101,3 +101,39 @@
 2026-03-18 06:07:14,887 - INFO - Skipping Moonshot API: no API key configured
 2026-03-18 06:07:14,888 - INFO - Dashboard generated: dashboard.html
 2026-03-18 06:07:14,888 - INFO - Processed 128 sessions, 3936 messages
+2026-03-18 06:27:20,808 - INFO - Starting token usage dashboard generation
+2026-03-18 06:27:21,125 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:27:21,126 - INFO - Skipping Moonshot API: no API key configured
+2026-03-18 06:27:21,127 - INFO - Dashboard generated: dashboard.html
+2026-03-18 06:27:21,127 - INFO - Processed 128 sessions, 3970 messages
+2026-03-18 06:35:44,379 - INFO - Starting token usage dashboard generation
+2026-03-18 06:35:44,686 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:35:45,021 - ERROR - Moonshot API error: 401 Client Error: Unauthorized for url: https://api.moonshot.ai/v1/users/me/balance
+2026-03-18 06:35:45,024 - INFO - Dashboard generated: dashboard.html
+2026-03-18 06:35:45,024 - INFO - Processed 128 sessions, 3992 messages
+2026-03-18 06:36:43,755 - INFO - Starting token usage dashboard generation
+2026-03-18 06:36:44,059 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:36:44,394 - INFO - Dashboard generated: dashboard.html
+2026-03-18 06:36:44,394 - INFO - Processed 128 sessions, 3994 messages
+2026-03-18 06:41:11,883 - INFO - Starting token usage dashboard generation
+2026-03-18 06:41:12,201 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 06:41:12,536 - INFO - Dashboard generated: dashboard.html
+2026-03-18 06:41:12,536 - INFO - Processed 128 sessions, 3997 messages
+2026-03-18 07:09:42,689 - INFO - Starting token usage dashboard generation
+2026-03-18 07:09:43,042 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 07:09:43,396 - INFO - Dashboard generated: dashboard.html
+2026-03-18 07:09:43,396 - INFO - Processed 128 sessions, 4077 messages
+2026-03-18 07:11:50,733 - INFO - Starting token usage dashboard generation
+2026-03-18 07:11:51,046 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 07:11:51,395 - INFO - Dashboard generated: dashboard.html
+2026-03-18 07:11:51,395 - INFO - Processed 128 sessions, 4084 messages
+2026-03-18 07:13:16,133 - INFO - Starting token usage dashboard generation
+2026-03-18 07:13:16,454 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 07:13:16,983 - INFO - Moonshot balance fetched: ¥83
+2026-03-18 07:13:16,985 - INFO - Dashboard generated: dashboard.html
+2026-03-18 07:13:16,985 - INFO - Processed 128 sessions, 4094 messages
+2026-03-18 07:14:07,092 - INFO - Starting token usage dashboard generation
+2026-03-18 07:14:07,411 - INFO - Parsed 128 sessions from /home/d-tuned/.openclaw/agents/main/sessions
+2026-03-18 07:14:07,763 - INFO - Moonshot balance fetched: ¥83
+2026-03-18 07:14:07,765 - INFO - Dashboard generated: dashboard.html
+2026-03-18 07:14:07,765 - INFO - Processed 128 sessions, 4106 messages

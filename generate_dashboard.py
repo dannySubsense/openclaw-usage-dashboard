@@ -894,7 +894,7 @@ def generate_html(data: DashboardData) -> str:
         <section id="budget-tracker">
             <h2>Monthly Budget</h2>
             <div class="budget-bar-container">
-                <div class="budget-bar{' warning' if data.monthly_spend >= data.warning_threshold else ''}" style="width: {budget_percent}%"><\/div>
+                <div class="budget-bar{' warning' if data.monthly_spend >= data.warning_threshold else ''}" style="width: {budget_percent}%"></div>
             </div>
             <div class="budget-info">
                 <div class="budget-info-item">
